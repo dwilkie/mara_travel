@@ -1,0 +1,95 @@
+!!!
+
+%html{:xmlns => "http://www.w3.org/1999/xhtml", "xml:lang" => "en", :lang => "en"}
+  %head
+    %meta{'http-equiv' => "Content-Type", :content => "text/html; charset=utf-8"}
+
+    <!-- INDEX -->
+    %title
+      ExquisiteWorks - Homepage
+
+    %meta{:name => "author", :content => "WebCrafters"}
+    %meta{:name => "description", :content => "A short description of your company"}
+    %meta{:name => "keywords", :content => "Some keywords that best describe your business. Try to use these words in the texts from the page"}
+    %meta{:name => "language", :content => "english"}
+
+    = stylesheet_link_tag 'stylesheet'
+    = stylesheet_link_tag 'slider' # INDEX
+
+    = javascript_include_tag 'jquery-1.3.2.min'
+    = javascript_include_tag 'ui.core'
+    = javascript_include_tag 'ui.tabs'
+    = javascript_include_tag 'jquery.curvycorners.min'
+
+    :javascript
+      $(document).ready( function(){
+        $("#tabs-services").tabs({event: 'mouseover'});
+      });
+
+      $(function(){
+        settings = {
+          tl: { radius: 5 },
+          tr: { radius: 5 },
+          bl: { radius: 5 },
+          br: { radius: 5 }
+          antiAlias: true,
+          autoPad: true,
+          validTags: ["div"]
+        }
+        $('.box-white').corner(settings);
+        $('.box-black').corner(settings);
+      });
+
+    <!-- INDEX -->
+    <!-- slider -->
+
+    = javascript_include_tag 'loopedslider'
+
+    :javascript
+      $(function(){
+        $.fn.loopedSlider.defaults.addPagination = true;
+        $('#homeSlider').loopedSlider();
+      });
+
+    <!--/slider -->
+    = javascript_include_tag 'tfuse-top-panel'
+  %body
+    %div{:class => "bodywrap homepage bodybg2"}
+
+      .container
+        .header
+          .logo
+            %a{:href => "index.html"}
+              = image_tag "logo.png"
+          .topmenu
+            %ul
+              %li.active
+                %a{:href => "index.html"}
+                  Home
+              %li
+                %a{:href => "about.html"}
+                  About Us
+              %li
+                %a{:href => "services.html"}
+                  Tours
+              %li
+                %a{:href => "portfolio.html"}
+                  Destinations
+              %li
+                %a{:href => "blog.html"}
+                  Blog
+              %li
+                %a{:href => "contact.html"}
+                  Contact
+          .clear
+          .search-box
+            %form{:action => "", :method => "post"}
+              %input.stext{:type => "text", :name => "search", :value => "Search", :onfocus => "if (this.value == 'Search') {this.value = '';}", :onblur => "if (this.value == '') {this.value = 'Search';}"}
+
+          .top-title
+            %strong
+              Welcome
+          .clear
+      <!--/ header -->
+    = yield
+
