@@ -1,3 +1,5 @@
+.bundle
+db/*.sqlite3
+log/*.log
+tmp/
 vendor/ruby
-.bundle/
-.components

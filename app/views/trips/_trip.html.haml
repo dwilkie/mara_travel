@@ -1,0 +1,12 @@
+%li
+  .slide-text
+    %h2
+      = trip.title
+    %p
+      = trip.snippit
+    %p.view_details
+      %a{:href => "#"}
+        View product details
+  .slide-image
+    = image_tag "slider/slider_image_#{trip_counter + 1}.png"
+
