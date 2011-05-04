@@ -6,8 +6,7 @@
   .topmenu
     %ul
       %li
-        %a{:href => "index.html"}
-          Home
+        = link_to "Home", root_path
       %li
         %a{:href => "about.html"}
           About Us
@@ -30,7 +29,7 @@
 
   .top-title
     %strong
-      Welcome
+      = yield :title
   .clear
 <!--/ header -->
 

@@ -1,12 +1,16 @@
 - content_for :title do
   = @trip.title
 
+- content_for :pretty_photo do
+  = stylesheet_link_tag 'pretty_photo'
+  = javascript_include_tag 'jquery.pretty_photo'
+
 .middle
   <!-- content -->
   .wrapper
     .content
-      %div{:class => "text box-white"}
       <!-- page text -->
+      %div{:class => "text box-white"}
         .post
           .post-descr
             Exotic
@@ -17,32 +21,29 @@
             %em
               Often voted as Antiguas’ most beautiful beach
 
-            %div{:class => "project-img gallery"}
-              = image_tag "img7.jpg", :height => "208", :width => "504", :border => "0"
-              %a.btn-preview{:href="#"}
-                Live preview
+          %div{:class => "project-img gallery"}
+            = image_tag "img7.jpg", :height => "208", :width => "504", :border => "0"
+            %a.btn-screens{:href => @trip.master_image.path(:full_path => true), :rel => "prettyPhoto[gallery1]"}
+              Live preview
+          .post-entry
+            %p
+              %strong
+                It is a long established fact
+              that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
 
-              %a.btn-screens{:href => "screens/tmp_screen_1.jpg", :rel => "prettyPhoto[gallery1]"}
-                Live preview
-            .post-entry
-              %p
-                %strong
-                  It is a long established fact
-                that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+              = image_tag "img-features.gif", :size => "227x305", :border => "0", :class => "alignright noborder"
 
-                = image_tag "img-features.gif" :width => "227", :height => "304" :border => "0", :class => "alignright noborder"
+            %p
+              %strong
+                It is a long established fact
+              that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.
 
-              %p
-                %strong
-                  It is a long established fact
-                that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.
+            %p
+              %strong
+                It is a long established fact
+              that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.
 
-              %p
-                %strong
-                  It is a long established fact
-                that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.
-
-            .clear
+          .clear
 
           %div{:class => "post-descr bordered"}
             %em
@@ -67,11 +68,11 @@
       .work-name
         %a{:href => "#"}
           Koh Samui
-      .work-descr="work-descr"
+      .work-descr
         Idyllic beach setting.
       .work-image
         %a{:href => "#"}
-          = image_tag "tmp_work_1.jpg", :size => "220x105", :border="0"
+          = image_tag "tmp_work_1.jpg", :size => "220x105", :border => "0"
       .link-go
         %a{:href => "#"}
           %strong

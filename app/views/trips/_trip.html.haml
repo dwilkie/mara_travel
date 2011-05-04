@@ -5,8 +5,7 @@
     %p
       = trip.snippit
     %p.view_details
-      %a{:href => "#"}
-        View product details
+      = link_to "View trip details", trip
   .slide-image
-    = image_tag "slider/slider_image_#{trip_counter + 1}.png"
+    = image_tag trip.master_image.path
 

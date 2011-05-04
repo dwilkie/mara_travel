@@ -1,0 +1,4 @@
+%li
+  %a{:href => image.path(:full_path => true), :rel => "prettyPhoto[gallery1]", :title => image.caption}
+    = image_tag image.path(:thumbnail => true), :alt => image.title, :size => "62x62"
+
