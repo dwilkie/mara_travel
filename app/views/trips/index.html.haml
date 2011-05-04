@@ -1,3 +1,16 @@
+- content_for :title do
+  Homepage
+
+- content_for :slider do
+  = stylesheet_link_tag 'slider'
+  = javascript_include_tag 'loopedslider'
+
+  :javascript
+    $(function(){
+      $.fn.loopedSlider.defaults.addPagination = true;
+      $('#homeSlider').loopedSlider();
+    });
+
 <!-- slider -->
 #homeSlider.sliderbox
   .slide-container
@@ -10,46 +23,46 @@
       &nbsp;
 <!--/ slider -->
 
+<!-- middle -->
 %div{:class => "middle box-white"}
-  <!-- content -->
 
+  <!-- content -->
   .wrapper
     .content
-    <!-- homepage text left -->
-    .home-text
-    %h1
-      Its simple, we just love what we do!
-    %p
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries. Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-    = render :partial => "services", :locals => {:services => %w{car plane boat bus}}
-    .clear
-    <!--/ homepage text left -->
-    <!--/ content -->
+      <!-- homepage text left -->
+      .home-text
+        %h1
+          Its simple, we just love what we do!
+        %p
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries. Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+        = render :partial => "services", :locals => {:services => %w{car plane boat bus}}
+        .clear
+      <!--/ homepage text left -->
+  <!--/ content -->
 
-    <!-- navigation -->
-    .navigation
-      .textimonials
-        %h2
-          Testimonials
-          %p
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and. scrambled it
-          %br
+  <!-- navigation -->
+  .navigation
+    .textimonials
+      %h2
+        Testimonials
+      %p
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and. scrambled it
+      %br
 
-          %span{:class => "title-hw"}
-            Albert Finney
-          %br
+      %span{:class => "title-hw"}
+        Albert Finney
+      %br
 
-          %span{:class => "text-gray"}
-            CEO, Microsoft HQ
-          %br
-          %br
-          %p
-            %a.btn-blue{:href =>"#"}
-              Let's talk business
-          %br
+      %span{:class => "text-gray"}
+        CEO, Microsoft HQ
+      %br
+      %br
+      %p
+        %a.btn-blue{:href =>"#"}
+          Let's talk business
+      %br
+  <!--/ navigation -->
 
-    <!--/ navigation -->
-    .clear
-  <!--/ middle -->
-  <!-- footer -->
+  .clear
+<!--/ middle -->
 

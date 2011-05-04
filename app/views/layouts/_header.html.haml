@@ -1,0 +1,36 @@
+<!-- header -->
+.header
+  .logo
+    %a{:href => "index.html"}
+      = image_tag "logo.png"
+  .topmenu
+    %ul
+      %li.active
+        %a{:href => "index.html"}
+          Home
+      %li
+        %a{:href => "about.html"}
+          About Us
+      %li
+        %a{:href => "services.html"}
+          Tours
+      %li
+        %a{:href => "portfolio.html"}
+          Destinations
+      %li
+        %a{:href => "blog.html"}
+          Blog
+      %li
+        %a{:href => "contact.html"}
+          Contact
+  .clear
+  .search-box
+    %form{:action => "", :method => "post"}
+      %input.stext{:type => "text", :name => "search", :value => "Search", :onfocus => "if (this.value == 'Search') {this.value = '';}", :onblur => "if (this.value == '') {this.value = 'Search';}"}
+
+  .top-title
+    %strong
+      Welcome
+  .clear
+<!--/ header -->
+

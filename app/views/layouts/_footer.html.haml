@@ -1,0 +1,44 @@
+<!-- footer -->
+.footer
+  %div{:class => "footer-content box-black"}
+    .fcol-2
+      %h3
+        Latest Offers
+      %ul
+        %li
+          %a{:href => "#"}
+            Koh Samui
+        %li
+          %a{:href => "#"}
+            Palm Beach
+        %li
+          %a{:href => "#"}
+            Grace Bay
+        %li
+          %a{:href => "#"}
+            Bahamas
+    .fcol-3
+      .newsletter-box
+        %h3
+          Newsletter
+        %form{:action => "", :method => "post"}
+          %input.input-bot{:type => "text", :name => "search", :value => "Type your email", :onfocus => "if (this.value == 'Type your email') {this.value = '';}", :onblur => "if (this.value == '') {this.value = 'Type your email';}"}
+
+          %input.btn-go{:type => "submit", :value => "Go"}
+          .clear
+      %h3
+        Lets get social
+      %p
+        %a{:href => "#"}
+          = image_tag("ico-rss.gif", :size => "26x26", :alt =>"Subscribe to RSS")
+        %a{:href => "#"}
+          = image_tag("ico-twitter.gif", :size => "26x26", :alt =>"Follow us on Twitter")
+        %a{:href => "#"}
+          = image_tag("ico-facebook.gif", :size => "26x26", :alt =>"Facebook connect")
+        %a{:href => "#"}
+          = image_tag("ico-social-in.gif", :size => "26x26", :alt =>"Social In")
+    .clear
+  .copyright
+    %p
+      &copy; 2010 ExquisiteWorks. All rights reserved.
+
