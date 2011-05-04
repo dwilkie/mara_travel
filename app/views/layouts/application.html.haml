@@ -44,7 +44,10 @@
 
     = javascript_include_tag 'tfuse-top-panel'
   %body
-    %div{:class => "bodywrap homepage bodybg2"}
+    - body_classes = [:bodywrap, :bodybg2]
+    - body_classes << :homepage if defined?(@homepage) && @homepage
+
+    %div{:class => body_classes.join(" ")}
       .container
         = render "layouts/header"
         = yield
