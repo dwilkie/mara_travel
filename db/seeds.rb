@@ -34,7 +34,7 @@ end
 
 def create_day_schedule!(trip, day, sequence)
   day_schedule = trip.day_schedules.build
-  day_schedule.sequence = 1
+  day_schedule.sequence = sequence
   day_schedule.day = day
   day_schedule.save!
   day_schedule
