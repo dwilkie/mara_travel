@@ -5,6 +5,7 @@ class CreateImages < ActiveRecord::Migration
       t.string :filename
       t.string :caption
       t.references :trip
+      t.references :experience
       t.timestamps
     end
   end

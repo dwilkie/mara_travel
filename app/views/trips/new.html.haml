@@ -1,0 +1,11 @@
+.middle
+  <!-- content -->
+  .wrapper
+    .content
+      <!-- page text -->
+      = simple_form_for @trip do |trips_form|
+        = trips_form.input :title
+        = trips_form.input :description
+        = trips_form.simple_fields_for :days do |days_form|
+          = days_form.association :activity
+

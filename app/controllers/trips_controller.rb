@@ -6,7 +6,13 @@ class TripsController < ApplicationController
 
   def show
     @trip = Trip.find(params[:id])
-    @images = @trip.images
+    @images = Image.from_trip(@trip)
   end
+
+  def new
+    @trip = Trip.new
+    @trip.activities.build
+  end
+
 end
 

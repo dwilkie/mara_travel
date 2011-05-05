@@ -1,7 +1,17 @@
 class Image < ActiveRecord::Base
   belongs_to :trip
+  belongs_to :experience
+
   validates :filename, :presence => true, :length => 0..160
   validates :title, :caption, :length => 0..160
+
+  def self.from_trip(trip)
+    scoped.joins(
+      :experience => {
+        :activity => {:days => :trips}
+      }
+    ).where("trips.id" => trip.id)
+  end
 
   def path(options = {})
     file_path = ""

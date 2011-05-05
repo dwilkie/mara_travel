@@ -10,20 +10,57 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110504151222) do
+ActiveRecord::Schema.define(:version => 20110505073937) do
+
+  create_table "activities", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "activity_schedules", :force => true do |t|
+    t.integer  "day_id"
+    t.integer  "activity_id"
+    t.string   "time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "day_schedules", :force => true do |t|
+    t.integer  "day_id"
+    t.integer  "trip_id"
+    t.integer  "sequence"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "days", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "experiences", :force => true do |t|
+    t.integer  "activity_id"
+    t.integer  "location_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "images", :force => true do |t|
     t.string   "title"
     t.string   "filename"
     t.string   "caption"
     t.integer  "trip_id"
+    t.integer  "experience_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "trip_images", :force => true do |t|
-    t.integer  "image_id"
-    t.integer  "trip_id"
+  create_table "locations", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
