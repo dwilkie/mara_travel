@@ -1,5 +1,5 @@
 - content_for :title do
-  New Trip
+  Days
 
 <!-- middle -->
 %div{:class => "middle box-white"}
@@ -9,7 +9,6 @@
   .wrapper
     .content
       <!-- page text -->
-      = simple_form_for @trip do |trips_form|
-        = trips_form.input :title
-        = trips_form.input :description
+      %div{:class => "text box-white"}
+        = render @days
 

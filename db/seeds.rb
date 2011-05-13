@@ -17,9 +17,8 @@ def create_item!(item_class, title, description, options = {})
   item
 end
 
-def create_activity_schedule!(day, activity, time)
+def create_activity_schedule!(day, activity)
   activity_schedule = day.activity_schedules.build
-  activity_schedule.time = "6.00pm"
   activity_schedule.activity = activity
   activity_schedule.save!
   activity_schedule
@@ -40,13 +39,6 @@ def create_day_schedule!(trip, day, sequence)
   day_schedule
 end
 
-def create_experience!(activity, location)
-  experience = activity.experiences.build
-  experience.location = location
-  experience.save!
-  experience
-end
-
 def create_image!(options = {})
   options[:image] ||= Image.new
   image = options.delete(:image)
@@ -57,64 +49,78 @@ def create_image!(options = {})
   image
 end
 
-trip_image = create_image!(:filename => "slider_image_1.png")
+def seed_trip_info(admin_user)
+  trip_image = create_image!(:filename => "slider_image_1.png")
 
-trip = create_item!(
-  Trip,
-  "Best of Cambodia",
-  "Enjoy the best Cambodia has to offer....",
-  :master_image => trip_image
-)
+  trip = create_item!(
+    Trip,
+    "Best of Cambodia",
+    "Enjoy the best Cambodia has to offer....",
+    :master_image => trip_image,
+    :user => admin_user,
+    :published => true
+  )
 
-day = create_item!(
-  Day,
-  "Meet the group",
-  "Meet the leader and the rest of the group"
-)
+  day = create_item!(
+    Day,
+    "Meet the group",
+    "Meet the leader and the rest of the group"
+  )
 
-activity = create_item!(
-  Activity,
-  "Group meeting",
-  "Meet the leader and the rest of the group"
-)
+  bangkok = create_location!("Bangkok, Thailand")
 
-bangkok = create_location!("Bangkok, Thailand")
+  activity = create_item!(
+    Activity,
+    "Group meeting",
+    "Meet the leader and the rest of the group",
+    :location => bangkok
+  )
 
-create_experience!(activity, bangkok)
-create_activity_schedule!(day, activity, "6.00pm")
+  create_activity_schedule!(day, activity)
 
-activity = create_item!(
-  Activity,
-  "Group dinner",
-  "Have dinner with the rest of the group"
-)
+  activity = create_item!(
+    Activity,
+    "Group dinner",
+    "Have dinner with the rest of the group",
+    :location => bangkok
+  )
 
-experience = create_experience!(activity, bangkok)
-create_image!(:image => experience.images.build, :filename => "slider_image_3.png")
-create_activity_schedule!(day, activity, "7.00pm")
+  create_image!(
+    :image => activity.images.build,
+    :filename => "slider_image_3.png"
+  )
+  create_activity_schedule!(day, activity)
 
-create_day_schedule!(trip, day, 1)
+  create_day_schedule!(trip, day, 1)
 
-# Day 2
+  # Day 2
 
-day = create_item!(
-  Day,
-  "Travel Day",
-  nil
-)
+  day = create_item!(
+    Day,
+    "Bangkok to Siem Reap",
+    nil
+  )
 
-activity = create_item!(
-  Activity,
-  "Bus",
-  "The wheels on the bus go round and round"
-)
+  siem_reap = create_location!("Siem Reap, Cambodia")
 
-siem_reap = create_location!("Siem Reap, Cambodia")
+  activity = create_item!(
+    Activity,
+    "Bus from Bangkok to Siem Reap",
+    "Along the way we'll see some cows that can run!",
+    :location => siem_reap
+  )
 
-experience = create_experience!(activity, siem_reap)
-create_image!(:image => experience.images.build, :filename => "slider_image_2.png")
+  create_image!(
+    :image => activity.images.build,
+    :filename => "slider_image_2.png"
+  )
 
-create_activity_schedule!(day, activity, "8.00am")
+  create_activity_schedule!(day, activity)
 
-create_day_schedule!(trip, day, 2)
+  create_day_schedule!(trip, day, 2)
+end
+
+admin_user = User.where(:admin => true).first
+
+admin_user ? seed_trip_info(admin_user) : puts("Create an admin user first. Try rake mt:admin_user")
 

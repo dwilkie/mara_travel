@@ -1,7 +1,7 @@
 class TripsController < ApplicationController
   def index
     @homepage = true
-    @trips = Trip.scoped
+    @trips = Trip.published
   end
 
   def show
@@ -11,7 +11,6 @@ class TripsController < ApplicationController
 
   def new
     @trip = Trip.new
-    @trip.activities.build
   end
 
 end

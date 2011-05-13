@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(:version => 20110505073937) do
   create_table "activities", :force => true do |t|
     t.string   "title"
     t.text     "description"
+    t.integer  "location_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -22,7 +23,6 @@ ActiveRecord::Schema.define(:version => 20110505073937) do
   create_table "activity_schedules", :force => true do |t|
     t.integer  "day_id"
     t.integer  "activity_id"
-    t.string   "time"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -42,19 +42,12 @@ ActiveRecord::Schema.define(:version => 20110505073937) do
     t.datetime "updated_at"
   end
 
-  create_table "experiences", :force => true do |t|
-    t.integer  "activity_id"
-    t.integer  "location_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "images", :force => true do |t|
     t.string   "title"
     t.string   "filename"
     t.string   "caption"
     t.integer  "trip_id"
-    t.integer  "experience_id"
+    t.integer  "activity_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -68,8 +61,28 @@ ActiveRecord::Schema.define(:version => 20110505073937) do
   create_table "trips", :force => true do |t|
     t.string   "title"
     t.text     "description"
+    t.boolean  "published",   :default => false, :null => false
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "users", :force => true do |t|
+    t.string   "email",                               :default => "",    :null => false
+    t.string   "encrypted_password",   :limit => 128, :default => "",    :null => false
+    t.string   "reset_password_token"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",                       :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.boolean  "admin",                               :default => false, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
 end

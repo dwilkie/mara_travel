@@ -3,7 +3,6 @@ class CreateActivitySchedules < ActiveRecord::Migration
     create_table :activity_schedules do |t|
       t.references :day
       t.references :activity
-      t.string     :time
       t.timestamps
     end
   end

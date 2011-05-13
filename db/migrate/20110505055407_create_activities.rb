@@ -3,6 +3,7 @@ class CreateActivities < ActiveRecord::Migration
     create_table :activities do |t|
       t.string     :title
       t.text       :description
+      t.references :location
       t.timestamps
     end
   end

@@ -1,8 +1,18 @@
+- if defined?(@in_a_trip) && @in_a_trip
+  - trip_schedule = true
+- else
+  - trip_schedule = false
 %h1
-  Day
-  = day_counter + 1
-  \-
+  -if trip_schedule
+    Day
+    = day_counter + 1
+    \-
   = day.title.titleize
 %p
   = day.description
+%p
+  = link_to "Read more", day_activity_schedules_path(day)
+  - if !trip_schedule && defined?(@trip) && @trip
+    |
+    = link_to "Add to Itinerary", trip_day_schedule_path(@trip), :method => :create
 

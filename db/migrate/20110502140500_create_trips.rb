@@ -3,6 +3,8 @@ class CreateTrips < ActiveRecord::Migration
     create_table :trips do |t|
       t.string :title
       t.text   :description
+      t.boolean :published, :null => false, :default => false
+      t.references :user
       t.timestamps
     end
   end
