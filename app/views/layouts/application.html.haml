@@ -14,12 +14,9 @@
     %meta{:name => "language", :content => "english"}
 
     = csrf_meta_tag
-    = stylesheet_link_tag 'stylesheet'
+    = stylesheet_link_tag 'application'
 
-    = javascript_include_tag 'jquery-1.3.2.min'
-    = javascript_include_tag 'ui.core'
-    = javascript_include_tag 'ui.tabs'
-    = javascript_include_tag 'jquery.curvycorners.min'
+    = javascript_include_tag 'application'
 
     :javascript
       $(document).ready( function(){
@@ -43,7 +40,6 @@
     = yield :slider
     = yield :pretty_photo
 
-    = javascript_include_tag 'tfuse-top-panel'
   %body
     - body_classes = [:bodywrap, :bodybg2]
     - body_classes << :homepage if defined?(@homepage) && @homepage
