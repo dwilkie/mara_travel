@@ -37,9 +37,6 @@
         $('.box-black').corner(settings);
       });
 
-    = yield :slider
-    = yield :pretty_photo
-
   %body
     - body_classes = [:bodywrap, :bodybg2]
     - body_classes << :homepage if defined?(@homepage) && @homepage

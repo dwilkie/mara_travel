@@ -7,13 +7,15 @@
 #   Mayor.create(:name => 'Daley', :city => cities.first)
 
 def create_item!(item_class, title, description, options = {})
-  item = item_class.new
-  item.title = title
-  item.description = description
-  options.each do |key, value|
-    item.send("#{key}=", value)
+  index = options.delete(:index)
+  item = item_class.find_or_initialize_by_title(title << " " << index.to_s)
+  if item.new_record?
+    item.description = description << " " << index.to_s if description
+    options.each do |key, value|
+      item.send("#{key}=", value)
+    end
+    item.save!
   end
-  item.save!
   item
 end
 
@@ -25,9 +27,8 @@ def create_activity_schedule!(day, activity)
 end
 
 def create_location!(name)
-  location = Location.new
-  location.name = name
-  location.save!
+  location = Location.find_or_initialize_by_name(name)
+  location.save! if location.new_record?
   location
 end
 
@@ -49,13 +50,14 @@ def create_image!(options = {})
   image
 end
 
-def seed_trip_info(admin_user)
-  trip_image = create_image!(:filename => "slider_image_1.png")
+def seed_trip_info(admin_user, index = 1)
+  trip_image = create_image!(:filename => "slider_image_#{index}.png")
 
   trip = create_item!(
     Trip,
     "Best of Cambodia",
     "Enjoy the best Cambodia has to offer....",
+    :index => index,
     :master_image => trip_image,
     :user => admin_user,
     :published => true
@@ -64,7 +66,8 @@ def seed_trip_info(admin_user)
   day = create_item!(
     Day,
     "Meet the group",
-    "Meet the leader and the rest of the group"
+    "Meet the leader and the rest of the group",
+    :index => index
   )
 
   bangkok = create_location!("Bangkok, Thailand")
@@ -73,6 +76,7 @@ def seed_trip_info(admin_user)
     Activity,
     "Group meeting",
     "Meet the leader and the rest of the group",
+    :index => index,
     :location => bangkok
   )
 
@@ -82,12 +86,13 @@ def seed_trip_info(admin_user)
     Activity,
     "Group dinner",
     "Have dinner with the rest of the group",
+    :index => index,
     :location => bangkok
   )
 
   create_image!(
     :image => activity.images.build,
-    :filename => "slider_image_3.png"
+    :filename => "slider_image_{index + 1}.png"
   )
   create_activity_schedule!(day, activity)
 
@@ -97,8 +102,9 @@ def seed_trip_info(admin_user)
 
   day = create_item!(
     Day,
-    "Bangkok to Siem Reap",
-    nil
+    "Bangkok to Siem Reap}",
+    nil,
+    :index => index
   )
 
   siem_reap = create_location!("Siem Reap, Cambodia")
@@ -107,12 +113,13 @@ def seed_trip_info(admin_user)
     Activity,
     "Bus from Bangkok to Siem Reap",
     "Along the way we'll see some cows that can run!",
+    :index => index,
     :location => siem_reap
   )
 
   create_image!(
     :image => activity.images.build,
-    :filename => "slider_image_2.png"
+    :filename => "slider_image_#{index + 1}.png"
   )
 
   create_activity_schedule!(day, activity)
@@ -122,5 +129,11 @@ end
 
 admin_user = User.where(:admin => true).first
 
-admin_user ? seed_trip_info(admin_user) : puts("Create an admin user first. Try rake mt:admin_user")
+if admin_user
+  3.times do |index|
+    seed_trip_info(admin_user, index + 1)
+  end
+else
+  puts("Create an admin user first. Try rake mt:admin_user")
+end
 

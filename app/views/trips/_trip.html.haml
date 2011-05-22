@@ -1,11 +1,6 @@
-%li
-  .slide-text
-    %h2
-      = trip.title
+.slide
+  = link_to(image_tag(trip.master_image.path, :size => "570x270"), trip)
+  .caption
     %p
-      = trip.snippit
-    %p.view_details
-      = link_to "View trip details", trip
-  .slide-image
-    = image_tag trip.master_image.path
+      = trip.title
 
